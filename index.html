@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>VUE INTRO herhaling</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+<div id="app" class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="card" style="width: 18rem;">
+
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="card-title text-secondary">{{product}}</h5>
+            <p class="bg-success align-self-center m-0 text-white rounded-3 rounded-top-0 px-3">{{winkelwagen}}</p>
+        </div>
+        <div class="d-flex ">
+            <img :src="imagePrint" class="card-img-top" alt="afb product">
+            <div class=" flex-column justify-content-center align-items-center">
+                <div @click="updateAfbeeldingVoorraad(soort.soortId)" v-for="(soort, index) in soorten" key="soort.soortId" :style="{background:soort.kleur}" class="pe-auto kleurvak border border-2 border-white  p-2 me-2 mt-2"></div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <p class="card-text">{{beschrijvingMerk}}</p>
+            <ul>
+                <li v-for="productDetail in productDetails">{{productDetail}}</li>
+            </ul>
+            <div class="d-flex justify-content-between">
+                <button @click="toevoegenAanWinkelwagen" class="btn btn-success align-self-center" :disabled="aantalInVoorraad<=0"><i class="bi bi-basket3-fill"></i></button>
+                <h5 class="text-success display-6">$ {{prijs}}</h5>
+            </div>
+        </div>
+
+        <div class="card-footer text-body-secondary">
+            <div class="d-flex justify-content-between align-items-center">
+                <p class="fs-5 p-0 m-0">Voorraad:</p>
+                <div class="text-center">
+                    <p class="text-success m-0 p-0" v-if="aantalInVoorraad > 9">{{aantalInVoorraad}}</p>
+                    <p class="text-warning m-0 p-0" v-else-if="aantalInVoorraad>0 &&aantalInVoorraad<=9">{{aantalInVoorraad}}</p>
+                    <p class="text-danger m-0 p-0" v-else>{{aantalInVoorraad}}</p>
+                </div>
+                <p v-if="aantalInVoorraad>0" class="m-0 p-0"><i class="bi bi-check-circle-fill text-success fs-5"></i></p>
+                <p v-else class="m-0 p-0"><i class="bi bi-x-circle-fill text-danger fs-5"></i></p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="main.js"></script>
+</body>
+</html>

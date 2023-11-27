@@ -1,0 +1,8 @@
+.kleurvak{
+    outline: lightgrey solid 2px;
+    &.kleurvak:hover{
+        outline: darkgrey solid 2px;
+        cursor: pointer;
+    }
+}
+
